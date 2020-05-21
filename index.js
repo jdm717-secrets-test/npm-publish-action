@@ -1,7 +1,7 @@
 const core = require("@actions/core");
 const exec = require("@actions/exec");
 const io = require("@actions/io");
-const publishEach = require('./publish');
+const publish = require('./publish');
 
 async function run() {
   const npmAuth = core.getInput('npm-auth-token');
@@ -14,8 +14,7 @@ async function run() {
   // await exec.exec('./npm-publish-action/configure_env.sh', [npmPath, npmRegistry, npmAuth]);
   // await exec.exec('./npm-publish-action/publish.sh', [gitPath, npmPath]);
 
-  await exec.exec('cd', ['$GITHUB_WORKSPACE']);
-  await publishEach(npmRegistry, npmAuth);
+  await publish.publishEach(npmRegistry, npmAuth);
 }
 
 run();
